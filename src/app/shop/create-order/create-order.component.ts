@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CreateOrderService } from 'src/app/services/shopService/create-order.service';
 import { AngularFireStorage } from "@angular/fire/storage";
 import { CatagoryService } from 'src/app/services/shopService/catagory.service';
+import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-order',
@@ -20,7 +22,9 @@ export class CreateOrderComponent implements OnInit {
   imgArray = [];
   constructor(private createOrderService: CreateOrderService,
     private fireStorage: AngularFireStorage,
-    private catagoryService: CatagoryService) { }
+    private catagoryService: CatagoryService,
+    private router: Router,
+    private _snackBar: MatSnackBar) { }
 
     getCatagory() {
       this.catagoryService.getCatagory().subscribe(res => {
@@ -69,7 +73,7 @@ export class CreateOrderComponent implements OnInit {
     if (data === null) {
       return;
     }
-    this.createOrderService.createOrder(data).then(res => { });
+    this.createOrderService.createOrder(data).then(res => {});
     
     this.name = "";
     this.image = "";
@@ -77,6 +81,9 @@ export class CreateOrderComponent implements OnInit {
     this.description = "";
     this.price = "";
     this.quantity = "";
+    
+    this._snackBar.open("Uploded", "Clean", {duration: 1500});
+    this.router.navigate(["/my-products"]);
   }
 
 }

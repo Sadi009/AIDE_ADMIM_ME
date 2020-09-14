@@ -33,7 +33,7 @@
 <mat-accordion>
     <mat-expansion-panel *ngFor="let shop of shops | filter:search">
         <mat-expansion-panel-header (click)="onExpansion(shop.id)">
-          <mat-panel-title><h4>Name: {{shop.name}}</h4></mat-panel-title>
+          <mat-panel-title><h4>{{shop.name}}</h4></mat-panel-title>
           <mat-panel-description>
             <h5>Address: {{ shop.address }}</h5>
           </mat-panel-description>
@@ -82,7 +82,7 @@
                   Price: {{product.price}}
                 </mat-panel-description>
                 <mat-panel-description>
-                  quantity: {{ shop.product_quantity }}
+                  quantity: {{ product.quantity }}
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <mat-grid-list cols="3" rowHeight="100px" gutterSize="10px">

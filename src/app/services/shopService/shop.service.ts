@@ -5,22 +5,22 @@ import { Injectable } from '@angular/core';
 export class ShopService {
   constructor(private firestore: AngularFirestore) { }
   getShop() {
-    return this.firestore.collection("users", ref => ref.where('type', '==', 'Shop Owner')).get();
+    return this.firestore.collection("shops").get();
   }
   
   addShop(data) {
     return new Promise<any>((resolve, reject) => {
-      const firestoreDoc = this.firestore.collection("users").ref.doc();
+      const firestoreDoc = this.firestore.collection("shops").ref.doc();
       data.id = firestoreDoc.id;
       firestoreDoc.set(data);
     });
   }
 
   editShop(data) {
-    this.firestore.collection('users').doc(data.id).update(data);
+    this.firestore.collection('shops').doc(data.id).update(data);
   }
   deleteShop(data) {
-    return this.firestore.collection("users").doc(data).delete();
+    return this.firestore.collection("shops").doc(data).delete();
   }
 
 }

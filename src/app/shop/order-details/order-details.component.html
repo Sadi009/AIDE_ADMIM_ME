@@ -5,19 +5,54 @@
 </mat-form-field>
 <mat-accordion>
   <mat-expansion-panel *ngFor="let order of orders | filter:search">
-    <p> Customer Address: {{order.address}}</p>
-    <p>Mobile: {{ order.contact }}</p>
-      <mat-expansion-panel-header>
-        <mat-panel-title><h4>Customer Name: {{order.name}}</h4></mat-panel-title>
+      <mat-expansion-panel-header (click)="onExpansion(order.shop_id)">
+        <mat-panel-title><h4>{{order.name}}</h4></mat-panel-title>
         <mat-panel-description>
           <p>Date of order: {{ order.date }}</p>
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <mat-grid-list cols="2" gutterSize="10px" rowHeight="200px">
+        <mat-grid-tile>
+            <div>
+              <h3>Delivery Details</h3>
+            <p>Name: {{order.name}}</p>
+            <p> Customer Address: {{order.address}}</p>
+            <p>Mobile: {{ order.contact }}</p>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div *ngFor="let shop of shops">
+            <h3>Shop Details</h3>
+            <h4>Shop Name: {{shop.name}}</h4>
+            <p>Shop Address: {{shop.address}}</p>
+            <p>Shop Contact: {{shop.contact}}</p>
+          </div>
+      </mat-grid-tile>
+      </mat-grid-list>
       <!-- Product  -->
       <mat-accordion>
         <h3>Orders</h3>
-          <mat-expansion-panel *ngFor="let orderedProduct of order.products" (click)="onExpansion1(orderedProduct.product_id)">
-            <mat-expansion-panel-header (click)="onExpansion(orderedProduct.shop_id)">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Price</th>
+          </tr>
+          <tr *ngFor="let orderedProduct of order.products">
+            <td>{{orderedProduct.product_name}}</td>
+            <td>{{orderedProduct.product_quantity}}</td>
+            <td>{{orderedProduct.product_price}} TK</td>
+            <td>{{orderedProduct.product_quantity * orderedProduct.product_price}} TK</td>
+          </tr>
+          <tr style="border-top: 1px solid black;">
+            <td></td><td></td>
+            <td><b>Total Price</b> = </td>
+            <td>{{ order.total_price }} TK</td>
+          </tr>
+        </table>
+          <!-- <mat-expansion-panel *ngFor="let orderedProduct of order.products">
+            <mat-expansion-panel-header>
               <mat-panel-title>Products: {{orderedProduct.product_name}} </mat-panel-title>
               <mat-panel-description>
                 Price: {{orderedProduct.product_price}} TK.
@@ -55,7 +90,7 @@
             </mat-grid-list>
               
               
-          </mat-expansion-panel>
+          </mat-expansion-panel> -->
       </mat-accordion>
     </mat-expansion-panel>
 

@@ -44,11 +44,11 @@
         </mat-form-field>
         <mat-form-field floatLabel="auto" appearance="outline">
           <mat-label>Product Price</mat-label>
-          <input matInput required name="price" [(ngModel)]="price">
+          <input matInput type="number"required name="price" [(ngModel)]="price">
         </mat-form-field>
         <mat-form-field floatLabel="auto" appearance="outline">
           <mat-label>Product Quantity</mat-label>
-          <input matInput required name="quantity" [(ngModel)]="quantity">
+          <input matInput type="number" required name="quantity" [(ngModel)]="quantity">
         </mat-form-field>
         <br>
         <button mat-raised-button color="primary" [disabled]="!customForm.valid" (click)="onSubmit()">Add Product</button>

@@ -8,10 +8,7 @@ export class OrderDetailsService {
   getOrders() {
     return this.firestore.collection("orders").get();
   }
-  getUser(id) {
-    return this.firestore.collection("users", ref => ref.where('id', '==', id)).get();
-  }
-  getProducts(id) {
-    return this.firestore.collection("products", ref => ref.where('id', '==', id)).get();
+  getShop(id) {
+    return this.firestore.collection("shops", ref => ref.where('id', '==', id)).get();
   }
 }

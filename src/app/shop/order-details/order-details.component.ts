@@ -10,12 +10,13 @@ import { OrderDetailsService } from 'src/app/services/shopService/order-details.
 })
 export class OrderDetailsComponent implements OnInit {
   orders = [];
-  users;
+  shops;
   products;
   productsArr = [];
   user_id;
   product_id;
   search;
+  total;
 
   constructor(private orderService: OrderDetailsService, private productDetailService: ProductDetailsService) { }
   getOrders() {
@@ -28,37 +29,21 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit() {
     // this.orders = this.orderService.orders;
     this.getOrders();
-
   }
 
   onExpansion(id) {
-    this.users = [];
-    this.getUser(id);
+    this.shops = [];
+    this.getShops(id);
     this.user_id = id;
-
-  }
-  onExpansion1(id) {
-    this.products = [];
-    this.getProduct(id);
-    this.product_id = id;
-
   }
 
-  getUser(id) {
-    this.orderService.getUser(id).subscribe(res => {
+  getShops(id) {
+    this.orderService.getShop(id).subscribe(res => {
       res.forEach(result => {
-        this.users.push(result.data());
+        this.shops.push(result.data());
       });
     });
     }
-    getProduct(id) {
-      console.log(id);
-      this.orderService.getProducts(id).subscribe(res => {
-        res.forEach(result => {
-          this.products.push(result.data());
-        });
-      });
-      }
 
 
 //  Extra 
